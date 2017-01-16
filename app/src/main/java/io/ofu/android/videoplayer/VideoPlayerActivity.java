@@ -21,9 +21,6 @@ public class VideoPlayerActivity extends AppCompatActivity implements TextureVie
   // Log tag.
   private static final String TAG = VideoPlayerActivity.class.getName();
 
-  // Asset video file name.
-  private static final String URL = "http://techslides.com/demos/sample-videos/small.mp4";
-
   // MediaPlayer instance to control playback of video file.
   private MediaPlayer mMediaPlayer;
 
@@ -46,7 +43,7 @@ public class VideoPlayerActivity extends AppCompatActivity implements TextureVie
 
     try {
       mMediaPlayer = new MediaPlayer();
-      mMediaPlayer.setDataSource(URL);
+      mMediaPlayer.setDataSource(getVideoUrl());
       mMediaPlayer.setSurface(surface);
       mMediaPlayer.setLooping(true);
       mMediaPlayer.prepareAsync();
@@ -79,4 +76,10 @@ public class VideoPlayerActivity extends AppCompatActivity implements TextureVie
   public void onSurfaceTextureUpdated(SurfaceTexture surfaceTexture) {
 
   }
+
+  /**
+   * A native method that is implemented by the 'native-lib' native library,
+   * which is packaged with this application.
+   */
+  public native String getVideoUrl();
 }

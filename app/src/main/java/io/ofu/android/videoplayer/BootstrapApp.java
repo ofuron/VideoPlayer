@@ -13,6 +13,8 @@ public class BootstrapApp extends Application {
   @Override public void onCreate() {
     super.onCreate();
 
+    System.loadLibrary("native-lib");
+
     // Put Dagger2 init here
     mAppComponent = DaggerAppComponent.builder()
         .appModule(new AppModule(this))
