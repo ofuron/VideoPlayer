@@ -3,7 +3,7 @@
 
 extern "C"
 jstring
-Java_io_ofu_android_videoplayer_VideoPlayerActivity_getVideoUrl(
+Java_io_ofu_android_videoplayer_VideoPlayerFragment_getVideoUrl(
         JNIEnv *env,
         jobject /* this */) {
     std::string url = "http://techslides.com/demos/sample-videos/small.mp4";

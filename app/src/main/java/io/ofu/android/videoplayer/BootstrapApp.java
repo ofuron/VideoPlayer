@@ -21,4 +21,8 @@ public class BootstrapApp extends Application {
         .build();
   }
 
+
+  public AppComponent getAppComponent() {
+    return mAppComponent;
+  }
 }

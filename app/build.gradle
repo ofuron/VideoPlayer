@@ -2,73 +2,76 @@ apply plugin: 'com.android.application'
 apply plugin: 'com.neenbedankt.android-apt'
 
 android {
-  compileSdkVersion 24
-  buildToolsVersion "23.0.3"
+    compileSdkVersion 24
+    buildToolsVersion "23.0.3"
 
-  defaultConfig {
-    applicationId "com.mroli.android.androidbootstrap"
-    minSdkVersion 15
-    targetSdkVersion 24
-    versionCode 1
-    versionName "1.0"
+    defaultConfig {
+        applicationId "com.mroli.android.androidbootstrap"
+        minSdkVersion 15
+        targetSdkVersion 24
+        versionCode 1
+        versionName "1.0"
+        externalNativeBuild {
+            cmake {
+                cppFlags ""
+            }
+        }
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
+        }
+    }
+
+    packagingOptions {
+        exclude 'META-INF/services/javax.annotation.processing.Processor'
+        exclude 'META-INF/LICENSE.txt'
+        exclude 'META-INF/LICENSE'
+        exclude 'META-INF/license.txt'
+        exclude 'META-INF/NOTICE.txt'
+    }
+
+    // Encapsulates your external native build configurations.
     externalNativeBuild {
-      cmake {
-          cppFlags ""
-      }
+        cmake {
+            path "CMakeLists.txt"
+        }
     }
-  }
-  buildTypes {
-    release {
-      minifyEnabled false
-      proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
-    }
-  }
-
-  packagingOptions {
-      exclude 'META-INF/services/javax.annotation.processing.Processor'
-      exclude 'META-INF/LICENSE.txt'
-      exclude 'META-INF/LICENSE'
-      exclude 'META-INF/license.txt'
-      exclude 'META-INF/NOTICE.txt'
-  }
-
-  // Encapsulates your external native build configurations.
-  externalNativeBuild {
-    cmake {
-      path "CMakeLists.txt"
-    }
-  }
 }
 
 dependencies {
-  compile fileTree(dir: 'libs', include: ['*.jar'])
-  testCompile 'junit:junit:4.12'
+    compile fileTree(dir: 'libs', include: ['*.jar'])
+    testCompile 'junit:junit:4.12'
 
-  // Support libraries
-  compile 'com.android.support:appcompat-v7:24.1.1'
-  compile 'com.android.support:recyclerview-v7:24.1.1'
-  compile 'com.android.support:cardview-v7:24.1.1'
+    // Exo player
+    compile 'com.google.android.exoplayer:exoplayer:r2.1.1'
 
-  // Dagger2 Dependency injection
-  apt 'com.google.dagger:dagger-compiler:2.7'
-  compile 'com.google.dagger:dagger:2.7'
-  provided 'javax.annotation:jsr250-api:1.0'
+    // Support libraries
+    compile 'com.android.support:appcompat-v7:24.1.1'
+    compile 'com.android.support:recyclerview-v7:24.1.1'
+    compile 'com.android.support:cardview-v7:24.1.1'
 
-  // Glide image library
-  compile 'com.github.bumptech.glide:glide:3.7.0'
+    // Dagger2 Dependency injection
+    apt 'com.google.dagger:dagger-compiler:2.7'
+    compile 'com.google.dagger:dagger:2.7'
+    provided 'javax.annotation:jsr250-api:1.0'
 
-  // AutoValue
-  provided 'com.google.auto.value:auto-value:1.3'
-  apt 'com.google.auto.value:auto-value:1.3'
+    // Glide image library
+    compile 'com.github.bumptech.glide:glide:3.7.0'
 
-  // Retrofit / Okhttp
-  compile 'com.squareup.retrofit2:retrofit:2.0.0'
-  compile 'com.squareup.retrofit2:converter-jackson:2.0.0'
-  compile 'oauth.signpost:signpost-core:1.2.1.2'
-  compile 'se.akerfeldt:okhttp-signpost:1.1.0'
-  compile 'com.squareup.okhttp3:okhttp:3.1.2'
+    // AutoValue
+    provided 'com.google.auto.value:auto-value:1.3'
+    apt 'com.google.auto.value:auto-value:1.3'
 
-  // Jackson parsing
-  compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
-  compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.2.1'
+    // Retrofit / Okhttp
+    compile 'com.squareup.retrofit2:retrofit:2.0.0'
+    compile 'com.squareup.retrofit2:converter-jackson:2.0.0'
+    compile 'oauth.signpost:signpost-core:1.2.1.2'
+    compile 'se.akerfeldt:okhttp-signpost:1.1.0'
+    compile 'com.squareup.okhttp3:okhttp:3.1.2'
+
+    // Jackson parsing
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.1'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-annotations', version: '2.2.1'
 }
